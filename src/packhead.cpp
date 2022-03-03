@@ -41,9 +41,15 @@ PackHeader::PackHeader() : version(-1), format(-1) {}
 // simple checksum for the header itself (since version 10)
 **************************************************************************/
 
+static unsigned int custom_magic = 0;
+
 static unsigned char get_packheader_checksum(const upx_bytep buf, int len) {
     assert(len >= 4);
-    assert(get_le32(buf) == UPX_MAGIC_LE32);
+    if (custom_magic == 0) {
+        assert(get_le32(buf) == UPX_MAGIC_LE32);
+    } else {
+        assert(get_le32(buf) == custom_magic);
+    }
     // printf("1 %d\n", len);
     buf += 4;
     len -= 4;
@@ -171,7 +177,9 @@ void PackHeader::putPackHeader(upx_bytep p) {
 **************************************************************************/
 
 bool PackHeader::fillPackHeader(const upx_bytep buf, int blen) {
-    int boff = find_le32(buf, blen, UPX_MAGIC_LE32);
+    //int boff = find_le32(buf, blen, UPX_MAGIC_LE32);
+    custom_magic = buf[blen - 36] + (buf[blen - 35] * 0x100) + (buf[blen - 34] * 0x10000) + (buf[blen - 33] * 0x1000000);
+    int boff = find_le32(buf, blen, custom_magic);
     if (boff < 0)
         return false;
 

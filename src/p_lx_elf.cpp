@@ -4843,9 +4843,9 @@ void PackLinuxElf64::unpack(OutputFile *fo)
     fi->seek(overlay_offset - sizeof(l_info), SEEK_SET);
     fi->readx(&linfo, sizeof(linfo));
     lsize = get_te16(&linfo.l_lsize);
-    if (UPX_MAGIC_LE32 != get_le32(&linfo.l_magic)) {
-        throwCantUnpack("l_info corrupted");
-    }
+    //if (UPX_MAGIC_LE32 != get_le32(&linfo.l_magic)) {
+    //    throwCantUnpack("l_info corrupted");
+    //}
     p_info hbuf;  fi->readx(&hbuf, sizeof(hbuf));
     unsigned orig_file_size = get_te32(&hbuf.p_filesize);
     blocksize = get_te32(&hbuf.p_blocksize);
@@ -4995,8 +4995,8 @@ void PackLinuxElf64::unpack(OutputFile *fo)
     if (sz_unc == 0) { // uncompressed size 0 -> EOF
         // note: magic is always stored le32
         unsigned const sz_cpr = get_le32(&bhdr.sz_cpr);
-        if (sz_cpr != UPX_MAGIC_LE32)  // sz_cpr must be h->magic
-            throwCompressedDataViolation();
+        //if (sz_cpr != UPX_MAGIC_LE32)  // sz_cpr must be h->magic
+        //    throwCompressedDataViolation();
     }
     else { // extra bytes after end?
         throwCompressedDataViolation();
@@ -5793,9 +5793,9 @@ void PackLinuxElf32::unpack(OutputFile *fo)
     fi->seek(overlay_offset - sizeof(l_info), SEEK_SET);
     fi->readx(&linfo, sizeof(linfo));
     lsize = get_te16(&linfo.l_lsize);
-    if (UPX_MAGIC_LE32 != get_le32(&linfo.l_magic)) {
-        throwCantUnpack("l_info corrupted");
-    }
+    //if (UPX_MAGIC_LE32 != get_le32(&linfo.l_magic)) {
+    //    throwCantUnpack("l_info corrupted");
+    //}
     p_info hbuf;  fi->readx(&hbuf, sizeof(hbuf));
     unsigned orig_file_size = get_te32(&hbuf.p_filesize);
     blocksize = get_te32(&hbuf.p_blocksize);
@@ -6005,8 +6005,8 @@ void PackLinuxElf32::unpack(OutputFile *fo)
     if (sz_unc == 0) { // uncompressed size 0 -> EOF
         // note: magic is always stored le32
         unsigned const sz_cpr = get_le32(&bhdr.sz_cpr);
-        if (sz_cpr != UPX_MAGIC_LE32)  // sz_cpr must be h->magic
-            throwCompressedDataViolation();
+        //if (sz_cpr != UPX_MAGIC_LE32)  // sz_cpr must be h->magic
+        //    throwCompressedDataViolation();
     }
     else { // extra bytes after end?
         throwCompressedDataViolation();

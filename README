@@ -1,3 +1,6 @@
+This repo has been modified from https://github.com/upx/upx to allow unpacking of ELF binary using the UPX anti-unpacking technique.
+=======
+
                  ooooo     ooo  ooooooooo.  ooooooo  ooooo
                  `888'     `8'  `888   `Y88. `8888    d8'
                   888       8    888   .d88'   Y888..8P
