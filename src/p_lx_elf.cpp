@@ -4990,17 +4990,17 @@ void PackLinuxElf64::unpack(OutputFile *fo)
 
     // check for end-of-file
     fi->readx(&bhdr, szb_info);
-    unsigned const sz_unc = ph.u_len = get_te32(&bhdr.sz_unc);
+    //unsigned const sz_unc = ph.u_len = get_te32(&bhdr.sz_unc);
 
-    if (sz_unc == 0) { // uncompressed size 0 -> EOF
+    //if (sz_unc == 0) { // uncompressed size 0 -> EOF
         // note: magic is always stored le32
-        unsigned const sz_cpr = get_le32(&bhdr.sz_cpr);
+        //unsigned const sz_cpr = get_le32(&bhdr.sz_cpr);
         //if (sz_cpr != UPX_MAGIC_LE32)  // sz_cpr must be h->magic
         //    throwCompressedDataViolation();
-    }
-    else { // extra bytes after end?
-        throwCompressedDataViolation();
-    }
+    //}
+    //else { // extra bytes after end?
+        //throwCompressedDataViolation();
+    //}
 
     if (is_shlib) {
         un_DT_INIT(old_dtinit, (Elf64_Phdr *)(1+ (Elf64_Ehdr *)(void *)o_elfhdrs), dynhdr, fo, is_asl);
@@ -6000,17 +6000,17 @@ void PackLinuxElf32::unpack(OutputFile *fo)
 
     // check for end-of-file
     fi->readx(&bhdr, szb_info);
-    unsigned const sz_unc = ph.u_len = get_te32(&bhdr.sz_unc);
+    //unsigned const sz_unc = ph.u_len = get_te32(&bhdr.sz_unc);
 
-    if (sz_unc == 0) { // uncompressed size 0 -> EOF
+    //if (sz_unc == 0) { // uncompressed size 0 -> EOF
         // note: magic is always stored le32
-        unsigned const sz_cpr = get_le32(&bhdr.sz_cpr);
+        //unsigned const sz_cpr = get_le32(&bhdr.sz_cpr);
         //if (sz_cpr != UPX_MAGIC_LE32)  // sz_cpr must be h->magic
         //    throwCompressedDataViolation();
-    }
-    else { // extra bytes after end?
-        throwCompressedDataViolation();
-    }
+    //}
+    //else { // extra bytes after end?
+        //throwCompressedDataViolation();
+    //}
 
     if (is_shlib) {
         // DT_INIT must be restored.
